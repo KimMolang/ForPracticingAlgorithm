@@ -38,7 +38,7 @@ each element of array A is an integer within the range [−1,000,000..1,000,000]
 //	return 0;
 //}
 
-int solution(vector<int> &A) {
+int solution2(vector<int> &A) {
 	// write your code in C++14 (g++ 6.2.0)
 
 	sort(A.begin(), A.end(),
@@ -279,7 +279,7 @@ int EP2(int n)
 // #3 PARENTHESIS
 
 void EP3(int n);
-void PARENTHESIS(int n); // WOE Crazy
+void PARENTHESIS(int n); // WOW Crazy
 // http://junprogramer.tistory.com/66
 //int main()
 //{
@@ -297,18 +297,18 @@ void PARENTHESIS(int n)
 }
 
 
-// #4
+// #5
 // 정수 배열과 타겟 숫자가 주어지면, 합이 타겟값이 되는 두 원소의 인덱스를 찾으시오.
 // 단, 시간복잡도 O(n) 여야 합니다.
 
 #include <unordered_map>
 
 void EP4(int arr[], int target);
-int main()
-{
-	int arr[] = { 2, 5, 6, 1, 10 };
-	EP4(arr, 8);
-}
+//int main()
+//{
+//	int arr[] = { 2, 5, 6, 1, 10 };
+//	EP4(arr, 8);
+//}
 
 void EP4(int arr[], int target)
 {
@@ -335,3 +335,244 @@ void EP4(int arr[], int target)
 // Data struct and basic algorithms (ex. array, vector, list, map, hash ...)
 
 // https://www.geeksforgeeks.org/leaders-in-an-array/
+
+int solution3(vector<int> &A);
+//int main()
+//{
+//	vector<int> arr;
+//	arr.push_back(1);
+//	arr.push_back(2);
+//	arr.push_back(-3);
+//	arr.push_back(4);
+//	arr.push_back(5);
+//	arr.push_back(-6);
+//
+//	cout << solution(arr) << endl;
+//
+//	return 1;
+//}
+
+int solution3(vector<int> &A)
+{
+	int Present = 0;
+	int Max = 0;
+
+	vector<int>::iterator iter = A.begin();
+	vector<int>::iterator iter_end = A.end();
+	for (; iter != iter_end; ++iter)
+	{
+		const int value = (*iter);
+
+		if (value < 0)
+		{
+			Present = 0;
+			continue;
+		}
+
+		Present += value;
+
+		//if (value > Present)
+		//	Present = value;
+
+		if (Present > Max)
+			Max = Present;
+	}
+
+	return Max;
+}
+
+int solution4(vector<int> &A);
+//int main()
+//{
+//	vector<int> arr;
+//	arr.push_back(-8);
+//	arr.push_back(4);
+//	arr.push_back(0);
+//	arr.push_back(5);
+//	arr.push_back(-3);
+//	arr.push_back(6);
+//
+//	cout << solution(arr) << endl;
+//}
+
+// Not good
+int solution4(vector<int> &A)
+{
+	int Max = 0;
+
+	int ArraySize = A.size();
+	for (int i = 0; i < ArraySize; ++i)
+	{
+		int CurrenValue = A[i] + A[i];
+
+		if (CurrenValue > Max)
+		{
+			Max = CurrenValue;
+		}
+
+		for (int j = i + 1; j < ArraySize; ++j)
+		{
+			CurrenValue = A[i] + A[j] + (j - i);
+
+			if (CurrenValue > Max)
+			{
+				Max = CurrenValue;
+			}
+		}
+	}
+
+	return Max;
+}
+
+
+
+int solution(vector<int> &A);
+int main()
+{
+	vector<int> arr;
+	//for( int i = 0; i < 10000; ++i)
+	//	arr.push_back(2);
+	arr.push_back(-1);
+	arr.push_back(1);
+	arr.push_back(3);
+	arr.push_back(3);
+	arr.push_back(3);
+	arr.push_back(2);
+	arr.push_back(3);
+	arr.push_back(2);
+	arr.push_back(1);
+	arr.push_back(0);
+
+	cout << solution(arr) << endl;
+}
+
+// AT list 3
+int GetTotalPeriodNum(int _ParticlesNum)
+{
+	const int AT_LEAST_PARTICLES_NUM = 3;
+
+
+	if (_ParticlesNum < AT_LEAST_PARTICLES_NUM)
+		return 0;
+	
+	
+	int LastNum = _ParticlesNum - 2;
+	int TotalNum = (LastNum * (LastNum + 1)) / 2;
+
+	if (TotalNum > MAX_TOTAL_TIMES)
+		return -1;
+	
+	//bool isOdd = (LastNum % 2) ? true : false;
+	//int HalfSize = LastNum / 2;
+
+	//int PlusValue = LastNum + 1;
+
+	//for (int i = 0; i < HalfSize; ++i)
+	//{
+	//	TotalNum += PlusValue;
+	//}
+
+	//if (isOdd)
+	//	TotalNum += HalfSize + 1;
+
+	return TotalNum;
+}
+
+int solution(vector<int> &A)
+{
+	const int MAX_TOTAL_TIMES = 1000000000;
+
+
+	vector<int>::iterator iter = A.begin();
+	vector<int>::iterator iter_end = A.end();
+
+	int TotalTimes = 0;
+	
+	++iter;
+	int CurrentVelocity = (*iter) - (*(iter - 1));
+	int CurrentParticlesCounter = 1;
+	
+
+	for (; iter != iter_end; ++iter)
+	{
+		int Velocity = (*iter) - (*(iter - 1));
+
+		if (CurrentVelocity == Velocity)
+		{
+			++CurrentParticlesCounter;
+		}
+		else
+		{
+			int Total = GetTotalPeriodNum(CurrentParticlesCounter);
+			// nononononono
+			// Check here and MAX_TOTAL_TIMES
+			// Total += CurrentParticlesCounter  - 1
+
+			if (Total == -1)
+				return -1;
+
+
+			TotalTimes += Total;
+
+			CurrentVelocity = Velocity;
+			CurrentParticlesCounter = 2;
+		}
+	}
+
+	TotalTimes += GetTotalPeriodNum(CurrentParticlesCounter);
+
+
+	return TotalTimes;
+}
+
+
+/*
+int solution(vector<int> &A) {
+
+const int AT_LEAST_PARTICLES_NUM = 3;
+const int MAX_TOTAL_TIMES = 1000000000;
+
+vector<int>::iterator iter = A.begin();
+vector<int>::iterator iter_end = A.end();
+
+int TotalTimes = 0;
+
+++iter;
+int CurrentVelocity = (*iter) - (*(iter - 1));
+int CurrentParticlesCounter = 2;
+
+
+for (; iter != iter_end; ++iter)
+{
+int Velocity = (*iter) - (*(iter - 1));
+bool bNeedInit = false;
+
+if (CurrentVelocity == Velocity)
+{
+++CurrentParticlesCounter;
+
+if (CurrentParticlesCounter >= AT_LEAST_PARTICLES_NUM)
+{
+++TotalTimes;
+
+if (TotalTimes > MAX_TOTAL_TIMES)
+return -1;
+
+bNeedInit = true;
+}
+}
+else
+{
+bNeedInit = true;
+}
+
+if (bNeedInit)
+{
+CurrentVelocity = Velocity;
+CurrentParticlesCounter = 2;
+}
+}
+
+return TotalTimes;
+}
+*/
