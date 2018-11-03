@@ -116,9 +116,8 @@ void printLeaders(int arr[], int size) {
 	}
 	*/
 
-	// You don'y need to keep numbers in Vector!!
+	// You don't need to keep numbers in Vector!!
 
-	strcpy()
 	int maxFromRight = arr[size - 1];
 
 	/* Rightmost element is always leader */
@@ -136,48 +135,79 @@ void printLeaders(int arr[], int size) {
 
 
 // 3. String Functions
-// http://mathboy7.tistory.com/entry/C%EC%96%B8%EC%96%B4-%EB%AC%B8%EC%9E%90%EC%97%B4-%ED%95%A8%EC%88%98-%EA%B5%AC%ED%98%84
-// http://achievstar.tistory.com/37
-// http://hiddenviewer.tistory.com/150 // keep going from here
+// https://m.blog.naver.com/PostView.nhn?blogId=matre88&logNo=60168749796&proxyReferer=https%3A%2F%2Fwww.google.ca%2F
+// http://hiddenviewer.tistory.com/150
 int strlen(char* str)
 {
-	return 0;
+	int len = 0;
+
+	while (str[len])
+		++len;
+
+	return len;
 }
 
 void strcpy(char* destination, char* source)
 {
+	int i = 0;
 
+	while (source[i])
+	{
+		destination[i] = source[i];
+		++i;
+	}
+
+	destination[++i] = '\0';
 }
 
 int strcmp(char* str1, char* str2)
 {
+	int i = 0;
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] == str2[i])
+		{
+			++i;
+		}
+		else if (str1[i] < str2[i])
+		{
+			return -1;
+		}
+		else if (str1[i] > str2[i])
+		{
+			return 1;
+		}
+	}
+
 	return 0;
 }
 
-//char* strcat(char* destination, char* source)
-char* strcat(char* dest, const char* scr)
+void strrevers(char* str)
 {
+	int len = strlen(str);
+	int halfLen = len / 2;
 
+	for (int i = 0; i < halfLen; ++i)
+	{
+		int oppositIndex = len - 1 - i;
+		char tmp = str[i];
+		str[i] = str[oppositIndex];
+		str[oppositIndex] = tmp;
+	}
 }
 
-char* strchr2(const char* const str, int ch)
+// 4. Everyday Programming
+
+// #1
+// 정수 배열(int array)가 주어지면 가장 큰 이어지는 원소들의 합을 구하시오.
+// 단, 시간복잡도는 O(n).
+// Input: [-1, 3, -1, 5] / Output : 7 // 3 + (-1) + 5
+// Input: [-5, -3, -1] / Output : -1 // -1
+//	Input : [2, 4, -2, -3, 8] / Output : 9 // 2 + 4 + (-2) + (-3) + 8
+void EP1(int arr[])
 {
-
+	
 }
-
-char* strrchr2(const char* const str, int ch)
-{
-
-}
-
-char* strpbrk2(const char* const str, const char* const control)
-{
-
-}
-
-// Everyday Programming
-
-// Codin Game
 
 // A* and the others path-finding algorithms
 
