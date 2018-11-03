@@ -276,6 +276,60 @@ int EP2(int n)
 	return sum;
 }
 
+// #3 PARENTHESIS
+
+void EP3(int n);
+void PARENTHESIS(int n); // WOE Crazy
+// http://junprogramer.tistory.com/66
+//int main()
+//{
+//	EP3(3);
+//}
+
+void EP3(int n)
+{
+	PARENTHESIS(n);
+}
+void PARENTHESIS(int n)
+{
+	if (n == 0)
+		return;
+}
+
+
+// #4
+// 정수 배열과 타겟 숫자가 주어지면, 합이 타겟값이 되는 두 원소의 인덱스를 찾으시오.
+// 단, 시간복잡도 O(n) 여야 합니다.
+
+#include <unordered_map>
+
+void EP4(int arr[], int target);
+int main()
+{
+	int arr[] = { 2, 5, 6, 1, 10 };
+	EP4(arr, 8);
+}
+
+void EP4(int arr[], int target)
+{
+	unordered_map<int, int> map;
+	for (int i = 0; arr[i] != NULL; ++i)
+	{
+		auto iter_find = map.find(arr[i]);
+
+		if (iter_find != map.end())
+		{
+			cout << "[ " << iter_find->second << ", " << i << " ]" << endl;
+			return;
+		}
+
+
+		int subtraction = (target - arr[i]);
+		map.insert(std::pair<int, int>(subtraction, i));
+	}
+}
+
+
 // A* and the others path-finding algorithms
 
 // Data struct and basic algorithms (ex. array, vector, list, map, hash ...)
