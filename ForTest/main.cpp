@@ -204,9 +204,76 @@ void strrevers(char* str)
 // Input: [-1, 3, -1, 5] / Output : 7 // 3 + (-1) + 5
 // Input: [-5, -3, -1] / Output : -1 // -1
 //	Input : [2, 4, -2, -3, 8] / Output : 9 // 2 + 4 + (-2) + (-3) + 8
-void EP1(int arr[])
+int EP1(int arr[])
 {
+	if (arr[0] == NULL)
+		return -99;
+
+	int Present = arr[0];
+	int Max = arr[0];
 	
+	int i = 1;
+	while (arr[i])
+	{
+		int value = arr[i];
+		Present += value;
+
+		if (value > Present)
+			Present = value;
+
+		if (Present > Max)
+			Max = Present;
+
+		++i;
+	}
+
+	return Max;
+}
+
+// #2 Fibonacci Numbers
+// 피보나치 배열은 0과 1로 시작하며, 다음 피보나치 수는 바로 앞의 두 피보나치 수의 합이 된다.
+// 정수 N이 주어지면, N보다 작은 모든 짝수 피보나치 수의 합을 구하여라.
+
+//int EP2(int n);
+//int main()
+//{
+//	int result = EP2(12);
+//	cout << result << endl;
+//}
+int EP2(int n)
+{
+	//vector<int> arr;
+	//arr.push_back(0);
+	//arr.push_back(1);
+
+	//int sum = 0;
+	//for ( int i = 0 ; ; ++i )
+	//{
+	//	int nextFibonacciNumbers = arr[i] + arr[i + 1];
+
+	//	if (nextFibonacciNumbers > n)
+	//		break;
+
+	//	arr.push_back(nextFibonacciNumbers);
+
+	//	if (arr[i + 1] % 2 == 0)
+	//		sum += arr[i + 1];
+	//}
+
+	int sum = 0;
+	int previouseValue = 1;
+	int previouseValueForNextStep = 1;
+	for (int i = 1; i < n; i += previouseValue)
+	{
+		previouseValue = previouseValueForNextStep;
+		previouseValueForNextStep = i;
+
+		if (i % 2 == 0)
+			sum += i;
+	}
+
+
+	return sum;
 }
 
 // A* and the others path-finding algorithms
