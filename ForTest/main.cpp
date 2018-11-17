@@ -32,34 +32,98 @@ N is an integer within the range [1..100,000];
 each element of array A is an integer within the range [−1,000,000..1,000,000].
 */
 
-//int main()
-//{
+int solution2(vector<int> &A);
+int main()
+{
+	vector<int> vec;
+	for (int i = 0; i < 200; ++i)
+	{
+		vec.push_back(1);
+		vec.push_back(3);
+		vec.push_back(6);
+		vec.push_back(4);
+		vec.push_back(1);
+		vec.push_back(2);
+		//vec.push_back(5);
+		//vec.push_back(8);
+	}
+
+	solution2(vec);
+	return 0;
+}
+
+//int solution2(vector<int> &A) {
+//	// write your code in C++14 (g++ 6.2.0)
 //
-//	return 0;
+//	sort(A.begin(), A.end(),
+//		[](int const& a, int const& b)
+//	{
+//		return (a < b);
+//	}
+//	);
+//
+//	vector<int>::iterator iter = A.begin();
+//	vector<int>::iterator iter_end = A.end();
+//
+//	int smallestNumberOutOfArray = 1;
+//
+//	for (; iter != iter_end; ++iter)
+//	{
+//		if (smallestNumberOutOfArray == (*iter))
+//			smallestNumberOutOfArray++;
+//	}
+//
+//	cout << smallestNumberOutOfArray << endl;
+//	return smallestNumberOutOfArray;
 //}
+
+#include <unordered_map>
+
+int FindValueInUnorderedMap
+(
+	const unordered_map<int, int>& _map
+	, const int _Value
+)
+{
+	int nextNumber = _Value + 1;
+
+	auto iter_find = _map.find(nextNumber);
+
+	if (iter_find != _map.end())
+	{
+		return FindValueInUnorderedMap(_map, nextNumber);
+	}
+	else
+	{
+		return nextNumber;
+	}
+}
 
 int solution2(vector<int> &A) {
 	// write your code in C++14 (g++ 6.2.0)
 
-	sort(A.begin(), A.end(),
-		[](int const& a, int const& b)
-	{
-		return (a < b);
-	}
-	);
-	
 	vector<int>::iterator iter = A.begin();
 	vector<int>::iterator iter_end = A.end();
+
+	unordered_map<int, int> saveValue;
 
 	int smallestNumberOutOfArray = 1;
 
 	for (; iter != iter_end; ++iter)
 	{
-		if (smallestNumberOutOfArray == (*iter))
-			smallestNumberOutOfArray++;
+		saveValue.insert(std::make_pair((*iter), (*iter)));
+
+		int targetValue = (*iter);
+
+		//if(smallestNumberOutOfArray < targetValue)
+		if (smallestNumberOutOfArray == targetValue)
+		{
+			smallestNumberOutOfArray
+				= FindValueInUnorderedMap(saveValue, targetValue);
+		}
 	}
 
-
+	cout << smallestNumberOutOfArray << endl;
 	return smallestNumberOutOfArray;
 }
 
@@ -426,30 +490,31 @@ int solution4(vector<int> &A)
 
 
 
-int solution(vector<int> &A);
-int main()
-{
-	vector<int> arr;
-	//for( int i = 0; i < 10000; ++i)
-	//	arr.push_back(2);
-	arr.push_back(-1);
-	arr.push_back(1);
-	arr.push_back(3);
-	arr.push_back(3);
-	arr.push_back(3);
-	arr.push_back(2);
-	arr.push_back(3);
-	arr.push_back(2);
-	arr.push_back(1);
-	arr.push_back(0);
-
-	cout << solution(arr) << endl;
-}
+int solution5(vector<int> &A);
+//int main()
+//{
+//	vector<int> arr;
+//	//for( int i = 0; i < 10000; ++i)
+//	//	arr.push_back(2);
+//	arr.push_back(-1);
+//	arr.push_back(1);
+//	arr.push_back(3);
+//	arr.push_back(3);
+//	arr.push_back(3);
+//	arr.push_back(2);
+//	arr.push_back(3);
+//	arr.push_back(2);
+//	arr.push_back(1);
+//	arr.push_back(0);
+//
+//	cout << solution5(arr) << endl;
+//}
 
 // AT list 3
 int GetTotalPeriodNum(int _ParticlesNum)
 {
 	const int AT_LEAST_PARTICLES_NUM = 3;
+	const int MAX_TOTAL_TIMES = 1000000000;
 
 
 	if (_ParticlesNum < AT_LEAST_PARTICLES_NUM)
@@ -478,9 +543,9 @@ int GetTotalPeriodNum(int _ParticlesNum)
 	return TotalNum;
 }
 
-int solution(vector<int> &A)
+int solution5(vector<int> &A)
 {
-	const int MAX_TOTAL_TIMES = 1000000000;
+	//const int MAX_TOTAL_TIMES = 1000000000;
 
 
 	vector<int>::iterator iter = A.begin();
@@ -576,3 +641,7 @@ CurrentParticlesCounter = 2;
 return TotalTimes;
 }
 */
+
+
+// -------------------------
+
