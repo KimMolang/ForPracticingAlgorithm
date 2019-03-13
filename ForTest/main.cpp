@@ -10,12 +10,11 @@
 
 using namespace std;
 
+#pragma region // Basic
 /*
-1.
+#1 : 배열 안에서 없는 숫자 중 제일 작은 값 출력
 This is a demo task.
-
 Write a function:
-
 int solution(vector<int> &A);
 
 that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
@@ -32,27 +31,9 @@ N is an integer within the range [1..100,000];
 each element of array A is an integer within the range [−1,000,000..1,000,000].
 */
 
-int solution2(vector<int> &A);
-int main()
-{
-	vector<int> vec;
-	for (int i = 0; i < 200; ++i)
-	{
-		vec.push_back(1);
-		vec.push_back(3);
-		vec.push_back(6);
-		vec.push_back(4);
-		vec.push_back(1);
-		vec.push_back(2);
-		//vec.push_back(5);
-		//vec.push_back(8);
-	}
-
-	solution2(vec);
-	return 0;
-}
-
-//int solution2(vector<int> &A) {
+// 처음에 아래와 같이 비효율적인 걸 생각..
+//int solution1(vector<int> &A)
+//{
 //	// write your code in C++14 (g++ 6.2.0)
 //
 //	sort(A.begin(), A.end(),
@@ -74,6 +55,7 @@ int main()
 //	}
 //
 //	cout << smallestNumberOutOfArray << endl;
+//
 //	return smallestNumberOutOfArray;
 //}
 
@@ -99,7 +81,8 @@ int FindValueInUnorderedMap
 	}
 }
 
-int solution2(vector<int> &A) {
+int solution2(vector<int> &A)
+{
 	// write your code in C++14 (g++ 6.2.0)
 
 	vector<int>::iterator iter = A.begin();
@@ -127,9 +110,30 @@ int solution2(vector<int> &A) {
 	return smallestNumberOutOfArray;
 }
 
+int main_SmallestPositiveIntegerThatIsNotInArray()
+{
+	vector<int> vec;
+	for (int i = 0; i < 200; ++i)
+	{
+		vec.push_back(1);
+		vec.push_back(3);
+		vec.push_back(6);
+		vec.push_back(4);
+		vec.push_back(1);
+		vec.push_back(2);
+		//vec.push_back(5);
+		//vec.push_back(8);
+	}
+
+	//solution1(vec);
+	solution2(vec);
+	return 0;
+}
+
 
 /*
-2. https://www.geeksforgeeks.org/leaders-in-an-array/
+#2 https://www.geeksforgeeks.org/leaders-in-an-array/
+: 자기 기준, 오른쪽에 있는 모든 원소보다 자기 값이 제일 큰 원소 출력
 Leaders in an array
 Write a program to print all the LEADERS in the array.
 An element is leader if it is greater than all the elements to its right side.
@@ -138,15 +142,6 @@ For example int the array {16, 17, 4, 3, 5, 2}, leaders are 17, 5 and 2.
 
 Let the input array be arr[] and size of the array be size.
 */
-
-//void printLeaders(int arr[], int size);
-//int main()
-//{
-//	int arr[] = { 16, 17, 4, 3, 5, 2 };
-//	int n = sizeof(arr) / sizeof(arr[0]);
-//	printLeaders(arr, n);
-//	return 0;
-//}
 
 void printLeaders(int arr[], int size) {
 
@@ -197,8 +192,16 @@ void printLeaders(int arr[], int size) {
 	}
 }
 
+int main_BiggestValueInRightArray()
+{
+	int arr[] = { 16, 17, 4, 3, 5, 2 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+	printLeaders(arr, n);
 
-// 3. String Functions
+	return 0;
+}
+
+// #3 String Functions
 // https://m.blog.naver.com/PostView.nhn?blogId=matre88&logNo=60168749796&proxyReferer=https%3A%2F%2Fwww.google.ca%2F
 // http://hiddenviewer.tistory.com/150
 int strlen(char* str)
@@ -248,6 +251,7 @@ int strcmp(char* str1, char* str2)
 
 void strrevers(char* str)
 {
+
 	int len = strlen(str);
 	int halfLen = len / 2;
 
@@ -259,9 +263,10 @@ void strrevers(char* str)
 		str[oppositIndex] = tmp;
 	}
 }
+#pragma endregion
 
-// 4. Everyday Programming
 
+#pragma region // Everyday Programming
 // #1
 // 정수 배열(int array)가 주어지면 가장 큰 이어지는 원소들의 합을 구하시오.
 // 단, 시간복잡도는 O(n).
@@ -298,7 +303,7 @@ int EP1(int arr[])
 // 피보나치 배열은 0과 1로 시작하며, 다음 피보나치 수는 바로 앞의 두 피보나치 수의 합이 된다.
 // 정수 N이 주어지면, N보다 작은 모든 짝수 피보나치 수의 합을 구하여라.
 
-//int EP2(int n);
+int EP2(int n);
 //int main()
 //{
 //	int result = EP2(12);
@@ -324,6 +329,7 @@ int EP2(int n)
 	//		sum += arr[i + 1];
 	//}
 
+	// 이거 이해하기 어려워서 내 알고리즘 노트에는 다른 식으로 써놨음
 	int sum = 0;
 	int previouseValue = 1;
 	int previouseValueForNextStep = 1;
@@ -344,7 +350,8 @@ int EP2(int n)
 
 void EP3(int n);
 void PARENTHESIS(int n); // WOW Crazy
-// http://junprogramer.tistory.com/66
+// 해답 http://junprogramer.tistory.com/66
+// 해답 https://makefortune2.tistory.com/209
 //int main()
 //{
 //	EP3(3);
@@ -392,31 +399,11 @@ void EP4(int arr[], int target)
 		map.insert(std::pair<int, int>(subtraction, i));
 	}
 }
+#pragma endregion
 
 
-// A* and the others path-finding algorithms
-
-// Data struct and basic algorithms (ex. array, vector, list, map, hash ...)
-
-// https://www.geeksforgeeks.org/leaders-in-an-array/
-
-int solution3(vector<int> &A);
-//int main()
-//{
-//	vector<int> arr;
-//	arr.push_back(1);
-//	arr.push_back(2);
-//	arr.push_back(-3);
-//	arr.push_back(4);
-//	arr.push_back(5);
-//	arr.push_back(-6);
-//
-//	cout << solution(arr) << endl;
-//
-//	return 1;
-//}
-
-int solution3(vector<int> &A)
+#pragma region // Behavior Interactive
+int BehaviorInteractive_01(vector<int> &A)
 {
 	int Present = 0;
 	int Max = 0;
@@ -445,22 +432,7 @@ int solution3(vector<int> &A)
 	return Max;
 }
 
-int solution4(vector<int> &A);
-//int main()
-//{
-//	vector<int> arr;
-//	arr.push_back(-8);
-//	arr.push_back(4);
-//	arr.push_back(0);
-//	arr.push_back(5);
-//	arr.push_back(-3);
-//	arr.push_back(6);
-//
-//	cout << solution(arr) << endl;
-//}
-
-// Not good
-int solution4(vector<int> &A)
+int BehaviorInteractive_02(vector<int> &A)
 {
 	int Max = 0;
 
@@ -489,26 +461,27 @@ int solution4(vector<int> &A)
 }
 
 
+int main_BehaviorInteractive_01_02()
+{
+	vector<int> arr;
+	arr.push_back(-8);
+	arr.push_back(4);
+	arr.push_back(0);
+	arr.push_back(5);
+	arr.push_back(-3);
+	arr.push_back(6);
 
-int solution5(vector<int> &A);
-//int main()
-//{
-//	vector<int> arr;
-//	//for( int i = 0; i < 10000; ++i)
-//	//	arr.push_back(2);
-//	arr.push_back(-1);
-//	arr.push_back(1);
-//	arr.push_back(3);
-//	arr.push_back(3);
-//	arr.push_back(3);
-//	arr.push_back(2);
-//	arr.push_back(3);
-//	arr.push_back(2);
-//	arr.push_back(1);
-//	arr.push_back(0);
-//
-//	cout << solution5(arr) << endl;
-//}
+	for (auto& iter : arr)
+	{
+		cout << iter << " ";
+	}
+
+	cout << endl;
+	cout << BehaviorInteractive_01(arr) << endl;
+	cout << BehaviorInteractive_02(arr) << endl;
+
+	return 0;
+}
 
 // AT list 3
 int GetTotalPeriodNum(int _ParticlesNum)
@@ -519,14 +492,14 @@ int GetTotalPeriodNum(int _ParticlesNum)
 
 	if (_ParticlesNum < AT_LEAST_PARTICLES_NUM)
 		return 0;
-	
-	
+
+
 	int LastNum = _ParticlesNum - 2;
 	int TotalNum = (LastNum * (LastNum + 1)) / 2;
 
 	if (TotalNum > MAX_TOTAL_TIMES)
 		return -1;
-	
+
 	//bool isOdd = (LastNum % 2) ? true : false;
 	//int HalfSize = LastNum / 2;
 
@@ -543,7 +516,7 @@ int GetTotalPeriodNum(int _ParticlesNum)
 	return TotalNum;
 }
 
-int solution5(vector<int> &A)
+int BehaviorInteractive_03(vector<int> &A)
 {
 	//const int MAX_TOTAL_TIMES = 1000000000;
 
@@ -552,11 +525,11 @@ int solution5(vector<int> &A)
 	vector<int>::iterator iter_end = A.end();
 
 	int TotalTimes = 0;
-	
+
 	++iter;
 	int CurrentVelocity = (*iter) - (*(iter - 1));
 	int CurrentParticlesCounter = 1;
-	
+
 
 	for (; iter != iter_end; ++iter)
 	{
@@ -590,58 +563,194 @@ int solution5(vector<int> &A)
 	return TotalTimes;
 }
 
-
-/*
-int solution(vector<int> &A) {
-
-const int AT_LEAST_PARTICLES_NUM = 3;
-const int MAX_TOTAL_TIMES = 1000000000;
-
-vector<int>::iterator iter = A.begin();
-vector<int>::iterator iter_end = A.end();
-
-int TotalTimes = 0;
-
-++iter;
-int CurrentVelocity = (*iter) - (*(iter - 1));
-int CurrentParticlesCounter = 2;
-
-
-for (; iter != iter_end; ++iter)
+int main_BehaviorInteractive_03()
 {
-int Velocity = (*iter) - (*(iter - 1));
-bool bNeedInit = false;
+	vector<int> arr;
+	//for( int i = 0; i < 10000; ++i)
+	//	arr.push_back(2);
+	arr.push_back(-1);
+	arr.push_back(1);
+	arr.push_back(3);
+	arr.push_back(3);
+	arr.push_back(3);
+	arr.push_back(2);
+	arr.push_back(3);
+	arr.push_back(2);
+	arr.push_back(1);
+	arr.push_back(0);
 
-if (CurrentVelocity == Velocity)
+	cout << BehaviorInteractive_03(arr) << endl;
+
+	return 0;
+}
+
+
+//
+//int BehaviorInteractive_03(vector<int> &A)
+//{
+//
+//	const int AT_LEAST_PARTICLES_NUM = 3;
+//	const int MAX_TOTAL_TIMES = 1000000000;
+//
+//	vector<int>::iterator iter = A.begin();
+//	vector<int>::iterator iter_end = A.end();
+//
+//	int TotalTimes = 0;
+//
+//	++iter;
+//	int CurrentVelocity = (*iter) - (*(iter - 1));
+//	int CurrentParticlesCounter = 2;
+//
+//
+//	for (; iter != iter_end; ++iter)
+//	{
+//		int Velocity = (*iter) - (*(iter - 1));
+//		bool bNeedInit = false;
+//
+//		if (CurrentVelocity == Velocity)
+//		{
+//			++CurrentParticlesCounter;
+//
+//			if (CurrentParticlesCounter >= AT_LEAST_PARTICLES_NUM)
+//			{
+//				++TotalTimes;
+//
+//				if (TotalTimes > MAX_TOTAL_TIMES)
+//					return -1;
+//
+//				bNeedInit = true;
+//			}
+//		}
+//		else
+//		{
+//			bNeedInit = true;
+//		}
+//
+//		if (bNeedInit)
+//		{
+//			CurrentVelocity = Velocity;
+//			CurrentParticlesCounter = 2;
+//		}
+//	}
+//
+//	return TotalTimes;
+//}
+
+#pragma endregion
+
+
+
+
+// CPP program to reverse a string 
+#include <stdio.h> 
+
+/* function prototype for utility function to
+reverse a string from begin to end  */
+void reverse(char* begin, char* end);
+
+/*Function to reverse words*/
+void reverseWords(char* s)
 {
-++CurrentParticlesCounter;
+	char* word_begin = s;
+	char* temp = s; /* temp is for word boundry */
 
-if (CurrentParticlesCounter >= AT_LEAST_PARTICLES_NUM)
+					/*STEP 1 of the above algorithm */
+	while (*temp) {
+		temp++;
+		if (*temp == '\0') {
+			reverse(word_begin, temp - 1);
+		}
+		else if (*temp == ' ') {
+			reverse(word_begin, temp - 1);
+			word_begin = temp + 1;
+		}
+	} /* End of while */
+
+	  /*STEP 2 of the above algorithm */
+	reverse(s, temp - 1);
+}
+
+/* UTILITY FUNCTIONS */
+/*Function to reverse any sequence starting with pointer
+begin and ending with pointer end  */
+void reverse(char* begin, char* end)
 {
-++TotalTimes;
-
-if (TotalTimes > MAX_TOTAL_TIMES)
-return -1;
-
-bNeedInit = true;
+	char temp;
+	while (begin < end) {
+		temp = *begin;
+		*begin++ = *end;
+		*end-- = temp;
+	}
 }
-}
-else
+
+int main_reverseWordsInString()
 {
-bNeedInit = true;
+	char s[] = "i like this program very much";
+	char* temp = s;
+
+	reverseWords(s);
+	printf("%s", s);
+
+	return 1;
 }
 
-if (bNeedInit)
+void EP_19()
 {
-CurrentVelocity = Velocity;
-CurrentParticlesCounter = 2;
+	const int SIZE = 4;
+
+	int arr[SIZE][SIZE]
+		= { {1, 2, 3, 4 }
+		, { 5, 6, 7, 8 }
+		, { 9, 10, 11, 12 }
+	, { 13, 14, 15, 16 } };
+
+
+	int maxIndexCnt = SIZE - 1;
+	int minIndexCnt = 0;
+
+	int x = 0, y = 0;
+
+	int test = 2;
+	int i = 0;
+
+	while ( i < test)
+	{
+		while (x < maxIndexCnt)
+		{
+			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
+			++x;
+		}
+
+		while (y < maxIndexCnt)
+		{
+			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
+			++y;
+		}
+
+		--maxIndexCnt;
+
+		while (x > minIndexCnt)
+		{
+			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
+			--x;
+		}
+
+		++minIndexCnt;
+
+		while (y >= maxIndexCnt)
+		{
+			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
+			--y;
+		}
+
+		++i;
+	}
 }
+
+
+int main()
+{
+	EP_19();
+	getchar();
+	return 0;
 }
-
-return TotalTimes;
-}
-*/
-
-
-// -------------------------
-
