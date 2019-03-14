@@ -694,56 +694,85 @@ int main_reverseWordsInString()
 	return 1;
 }
 
+// #19
+// 2차 정수 배열(2D int array)가 주어지면, 소용돌이 모양으로 원소들을 프린트하시오.
+// Given a 2D integer array, print all elements in a circular spiral shape starting from[0][0].
 void EP_19()
 {
-	const int SIZE = 4;
+	const int SIZE_WIDTH = 6;
+	const int SIZE_HEIGH = 3;
 
-	int arr[SIZE][SIZE]
-		= { {1, 2, 3, 4 }
-		, { 5, 6, 7, 8 }
-		, { 9, 10, 11, 12 }
-	, { 13, 14, 15, 16 } };
+	int arr[SIZE_HEIGH][SIZE_WIDTH]
+		= { { 1,  2,  3,  4,  5,  6 }
+		, { 7,  8,  9,  10, 11, 12 }
+		, { 13, 14, 15, 16, 17, 18 } };
 
 
-	int maxIndexCnt = SIZE - 1;
-	int minIndexCnt = 0;
+	int ToRight = SIZE_WIDTH - 1;
+	int ToDown = SIZE_HEIGH - 1;
+	int ToLeft = 1;
+	int ToUp = 1;
 
 	int x = 0, y = 0;
 
-	int test = 2;
-	int i = 0;
 
-	while ( i < test)
+	while (x == ToLeft - 1 && y == ToUp - 1)
 	{
-		while (x < maxIndexCnt)
+		cout << "1 : " << endl;
+		for (; x < ToRight; ++x)
 		{
-			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
+			cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
+		}
+
+		--ToRight;
+		cout << endl;
+
+
+		cout << "2 : " << endl;
+		for (; y <= ToDown; ++y)
+		{
+			cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
+		}
+
+		--ToDown;
+		cout << endl;
+
+
+		
+		if (y > ToDown)
+		{
+			cout << "3 : " << endl;
+			for (; x >= ToLeft; --x)
+			{
+				cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
+			}
+
+			++ToLeft;
+			cout << endl;
+		}
+		
+
+		if (x <= ToLeft)
+		{
+			cout << "4 : " << endl;
+			for (; y >= ToUp; --y)
+			{
+				cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
+			}
+
+			++ToUp;
+			cout << endl;
+
+			++y;
 			++x;
 		}
 
-		while (y < maxIndexCnt)
-		{
-			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
-			++y;
-		}
-
-		--maxIndexCnt;
-
-		while (x > minIndexCnt)
-		{
-			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
-			--x;
-		}
-
-		++minIndexCnt;
-
-		while (y >= maxIndexCnt)
-		{
-			cout << "y : " << y << " x : " << x << " " << arr[y][x] << endl;
-			--y;
-		}
-
-		++i;
+		cout << "================" << endl;
+		cout << "One-Step-End" << endl;
+		cout << "y : " << y << "\tx : " << x <<endl;
+		cout << "ToRight : " << ToRight << "\tToDown : " << ToDown << endl;
+		cout << "ToLeft : " << ToLeft << "\tToUp : " << ToUp << endl;
+		cout << "================" << endl;;
 	}
 }
 
