@@ -700,86 +700,172 @@ int main_reverseWordsInString()
 void EP_19()
 {
 	const int SIZE_WIDTH = 6;
-	const int SIZE_HEIGH = 3;
+	const int SIZE_HEIGHT = 3;
 
-	int arr[SIZE_HEIGH][SIZE_WIDTH]
+	int arr[SIZE_HEIGHT][SIZE_WIDTH]
 		= { { 1,  2,  3,  4,  5,  6 }
 		, { 7,  8,  9,  10, 11, 12 }
 		, { 13, 14, 15, 16, 17, 18 } };
+	//const int SIZE_WIDTH = 4;
+	//const int SIZE_HEIGHT = 4;
+
+	//int arr[SIZE_HEIGHT][SIZE_WIDTH]
+	//	= {{ 1,  2,  3,  4 }
+	//	, { 7,  8,  9,  10 }
+	//	, { 13, 14, 15, 16 }
+	//	, { 17, 18, 19, 20 } };
 
 
-	int ToRight = SIZE_WIDTH - 1;
-	int ToDown = SIZE_HEIGH - 1;
-	int ToLeft = 1;
-	int ToUp = 1;
+	//int ToRight = SIZE_WIDTH - 1;
+	//int ToDown = SIZE_HEIGHT - 1;
+	//int ToLeft = 1;
+	//int ToUp = 1;
+	
+	int widthCnt = SIZE_WIDTH - 1;
+	int heightCnt = SIZE_HEIGHT - 1;
 
 	int x = 0, y = 0;
 
 
-	while (x == ToLeft - 1 && y == ToUp - 1)
+	//while (x == ToLeft - 1 && y == ToUp - 1)
+	while (widthCnt > 0 || heightCnt > 0)
 	{
 		cout << "1 : " << endl;
-		for (; x < ToRight; ++x)
+		//for (; x < ToRight; ++x)
+		for (int i = 0; i < widthCnt; ++i, ++x)
 		{
 			cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
 		}
 
-		--ToRight;
+		//--ToRight;
 		cout << endl;
 
 
 		cout << "2 : " << endl;
-		for (; y <= ToDown; ++y)
+		//for (; y <= ToDown; ++y)
+		for (int i = 0; i < heightCnt; ++i, ++y)
 		{
 			cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
 		}
 
-		--ToDown;
+		//--ToDown;
 		cout << endl;
 
 
 		
-		if (y > ToDown)
+		//if (y > ToDown)
+		if(y <= heightCnt + (SIZE_HEIGHT - y))
 		{
 			cout << "3 : " << endl;
-			for (; x >= ToLeft; --x)
+			//for (; x >= ToLeft; --x)
+			for (int i = 0; i < widthCnt; ++i, --x)
 			{
 				cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
 			}
 
-			++ToLeft;
+			//++ToLeft;
 			cout << endl;
 		}
 		
 
-		if (x <= ToLeft)
+		//if (x <= ToLeft)
 		{
 			cout << "4 : " << endl;
-			for (; y >= ToUp; --y)
+			//for (; y >= ToUp; --y)
+			for (int i = 0; i < heightCnt; ++i, --y)
 			{
 				cout << "y : " << y << "\tx : " << x << "\t" << arr[y][x] << endl;
 			}
 
-			++ToUp;
+			//++ToUp;
 			cout << endl;
 
 			++y;
 			++x;
 		}
 
+		widthCnt -= 2;
+		heightCnt -= 2;
+
 		cout << "================" << endl;
 		cout << "One-Step-End" << endl;
 		cout << "y : " << y << "\tx : " << x <<endl;
-		cout << "ToRight : " << ToRight << "\tToDown : " << ToDown << endl;
-		cout << "ToLeft : " << ToLeft << "\tToUp : " << ToUp << endl;
+		//cout << "ToRight : " << ToRight << "\tToDown : " << ToDown << endl;
+		//cout << "ToLeft : " << ToLeft << "\tToUp : " << ToUp << endl;
 		cout << "================" << endl;;
 	}
 }
+// 규칙이 아예 안 맞음..
 
+
+int main_spiralPrint()
+{
+	const int SIZE_WIDTH = 6;
+	const int SIZE_HEIGHT = 3;
+
+	int a[SIZE_HEIGHT][SIZE_WIDTH]
+		= { { 1,  2,  3,  4,  5,  6 }
+		, { 7,  8,  9,  10, 11, 12 }
+		, { 13, 14, 15, 16, 17, 18 } };
+
+	
+	int i, k = 0, l = 0;
+	int n = SIZE_WIDTH, m = SIZE_HEIGHT;
+
+	/*  k - starting row index
+	m - ending row index
+	l - starting column index
+	n - ending column index
+	i - iterator
+	*/
+
+	while (k < m && l < n)
+	{
+		/* Print the first row from the remaining rows */
+		for (i = l; i < n; ++i)
+		{
+			printf("%d ", a[k][i]);
+		}
+		k++;
+		cout << endl;
+
+		/* Print the last column from the remaining columns */
+		for (i = k; i < m; ++i)
+		{
+			printf("%d ", a[i][n - 1]);
+		}
+		n--;
+		cout << endl;
+
+		/* Print the last row from the remaining rows */
+		if (k < m)
+		{
+			for (i = n - 1; i >= l; --i)
+			{
+				printf("%d ", a[m - 1][i]);
+			}
+			m--;
+			cout << endl;
+		}
+
+		/* Print the first column from the remaining columns */
+		if (l < n)
+		{
+			for (i = m - 1; i >= k; --i)
+			{
+				printf("%d ", a[i][l]);
+			}
+			l++;
+			cout << endl;
+		}
+	}
+
+	return 0;
+}
 
 int main()
 {
-	EP_19();
+	main_spiralPrint();
 	getchar();
 	return 0;
 }
