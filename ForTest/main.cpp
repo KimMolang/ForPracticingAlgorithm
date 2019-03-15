@@ -349,23 +349,60 @@ int EP2(int n)
 // #3 PARENTHESIS
 
 void EP3(int n);
-void PARENTHESIS(int n); // WOW Crazy
+
 // 해답 http://junprogramer.tistory.com/66
 // 해답 https://makefortune2.tistory.com/209
-//int main()
-//{
-//	EP3(3);
-//}
 
-void EP3(int n)
+int allCnt = 0;
+
+void PARENTHESIS(const int openNum, const int closeNum)
 {
-	PARENTHESIS(n);
+	if (openNum == 0 && closeNum == 0)
+		return;
+
+
+	for (int i = 0; i < openNum; ++i)
+	{
+		cout << "(";
+	}
+
+	for (int i = 0; i < closeNum; ++i)
+	{
+		cout << ")";
+	}
 }
-void PARENTHESIS(int n)
+
+
+void start(int n)
 {
 	if (n == 0)
 		return;
+
+
+	int cnt = n;
+	for (int i = cnt; i > 0; --i)
+	{
+		PARENTHESIS(i, i);
+
+		if (i < ::allCnt)
+		{
+			PARENTHESIS(::allCnt - i, ::allCnt - i);
+		}
+
+		cout << endl;
+	}
+
 }
+
+void EP3(int n)
+{
+	if (n == 0)
+		return;
+
+	::allCnt = n;
+	start(::allCnt);
+}
+
 
 
 // #5
@@ -863,9 +900,125 @@ int main_spiralPrint()
 	return 0;
 }
 
+// DragonLab
+/*
+[테스트 문제]
+직사각형을 만드는 데 필요한 4개의 점 중 3개의 좌표가 주어질 때,
+나머지 한 점의 좌표를 구하려고 합니다.
+점 3개의 좌표가 들어있는 배열 v가 매개변수로 주어질 때,
+직사각형을 만드는 데 필요한 나머지 한 점의 좌표를 return 하도록 solution 함수를 완성해주세요.
+단, 직사각형의 각 변은 x축, y축에 평행하며,
+반드시 직사각형을 만들 수 있는 경우만 입력으로 주어집니다.
+*/
+//vector<int> solution(vector<vector<int> > v)
+//{
+//	const int DATA_NUM = 3;
+//	const int POINT_NUM = 2;
+//
+//	list<pair<int, int>> checkList; // <value, 0:x/1:y>
+//
+//	for (int x = 0; x < DATA_NUM; ++x)
+//	{
+//		for (int y = 0; y < POINT_NUM; ++y)
+//		{
+//			int currentValue = v[x][y];
+//
+//			auto iter = checkList.begin();
+//			auto iter_end = checkList.end();
+//
+//			bool isfouned = false;
+//
+//			for (; iter != iter_end; ++iter)
+//			{
+//				// [[1, 1], [2, 2], [1, 2]]
+//				// 기댓값 〉[2, 1]
+//				// 실행 결과 〉	실행한 결괏값 { 1, 2 }이(가) 기댓값 { 2, 1 }와(과) 다릅니다.
+//				// 그래서 && (*iter).second == y 기준 추가하였습니다.
+//				if ((*iter).first == currentValue && (*iter).second == y)
+//				{
+//					checkList.erase(iter);
+//					isfouned = true;
+//					break;
+//				}
+//			}
+//
+//			if (isfouned == false)
+//				checkList.push_back(make_pair(currentValue, y));
+//		}
+//	}
+//
+//	assert(checkList.size() == POINT_NUM);
+//		
+//	vector<int> ans;
+//
+//	auto iter = checkList.begin();
+//	if( (*iter).second == 0 )
+//	{ 
+//		ans.push_back((*iter).first);
+//		++iter;
+//		ans.push_back((*iter).first);
+//	}
+//	else
+//	{
+//		++iter;
+//		ans.push_back((*iter).first);
+//		--iter;
+//		ans.push_back((*iter).first);
+//	}
+//
+//
+//	return ans;
+//}
+
+// 위 내용을 좀 더 간단하게 해보자
+vector<int> function_Test_01(vector<vector<int> > v)
+{
+	vector<int> ans;
+
+	ans.push_back(v[0][0] ^ v[1][0] ^ v[2][0]);
+	ans.push_back(v[0][1] ^ v[1][1] ^ v[2][1]);
+
+	return ans;
+}
+
+int main__Test_01()
+{
+	vector<vector<int>> v;
+	v = { { 1, 4 }
+		,{ 3, 4 }
+	,{ 3, 10 } }; // x, y
+	function_Test_01(v);
+
+	return 0;
+}
+
+/*
+[테스트 문제]
+이 문제에는 표준 입력으로 두 개의 정수 n과 m이 주어집니다.
+별(*) 문자를 이용해 가로의 길이가 n, 세로의 길이가 m인 직사각형 형태를 출력해보세요.
+*/
+int main__Test_02()
+{
+	int a;
+	int b;
+	cin >> a >> b;
+
+	for (int i = 0; i < b; ++i)
+	{
+		for (int j = 0; j < a; ++j)
+		{
+			cout << "*";
+		}
+		cout << endl;
+	}
+
+
+	return 0;
+}
+
 int main()
 {
-	main_spiralPrint();
+	EP3(3);
 	getchar();
 	return 0;
 }
